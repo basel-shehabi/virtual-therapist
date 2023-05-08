@@ -1,7 +1,17 @@
 import openai
 import gradio
+import os
+import logging
 
-openai.api_key = "XXXXXXXX"
+from dotenv import load_dotenv
+
+load_dotenv() # Load environment variables
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # Fancy logging
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+if openai.api_key is not None:
+    logging.info('Retrieved API Key successfully!') # Used to test whether or not we retrieved the API key successfully
 
 messages = [{"role": "system", "content": "You are a trained and qualified psychiatrist"}]
 
